@@ -20,9 +20,7 @@ function App() {
      <Routes>
        <Route path='/upload' element={<Upload />}/>      
        <Route path='/music' element={<PrivateRoute Component={Music} />} />      
-       <Route path='/music2222' element={<Music />} />      
        <Route path='/' element={<Home />}/>        
-       <Route path='/purchased-music' element={<PurchasedMusic />}/>      
        <Route path='/login' element={<Login />}/>      
      </Routes>
      </BrowserRouter>
