@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 export default function Dropdown () {
     const navigate = useNavigate();
     const handleLogout = async () => {
-        await axios.get('http://localhost:3000/logout', {withCredentials: true})
+        await axios.get(`${import.meta.env.VITE_BACKEND_URL}/logout`, {withCredentials: true})
         .then((res) => {
             navigate('/login');
         });

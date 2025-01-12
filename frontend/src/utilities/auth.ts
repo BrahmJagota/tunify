@@ -19,7 +19,7 @@ export const loginfun = async ({
   setIsAuthenticated,
   setIsLoading,
 }: LoginInterface) => {
-  const response = axios.post("http://localhost:3000/auth-google", {
+  const response = axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth-google`, {
     credential, clientId
   }, {withCredentials: true})
   .then((res:any) => {
@@ -39,14 +39,14 @@ export const logout = ({setIsAuthenticated, setIsLoading}: AuthInterface) => {
 
 export const refreshAccessToken = async ({setIsAuthenticated, setIsLoading, setIsAdmin}: AuthInterface): Promise<string> => {
     try {
-      const response = await axios.post('http://localhost:3000/refresh-token', {}, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/refresh-token`, {}, {
         withCredentials: true,
       });
   
       const { accessToken } = response.data;
       setIsAuthenticated(true);
       setIsLoading(false);
-      const checkAdmin = await axios.get('/http://localhost:3000/me', {withCredentials: true})
+      const checkAdmin = await axios.get(`/${import.meta.env.VITE_BACKEND_URL}/me`, {withCredentials: true})
       const { admin } = checkAdmin.data;
       setIsAdmin(admin)
       return accessToken;

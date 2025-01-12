@@ -19,7 +19,6 @@ interface RenderRazorpayProps {
 export const loadScript = (src: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       if (document.querySelector(`script[src="${src}"]`)) {
-        console.log("Razorpay script already loaded");
         resolve(true);
         return;
       }
@@ -27,7 +26,6 @@ export const loadScript = (src: string): Promise<boolean> => {
       const script = document.createElement("script");
       script.src = src;
       script.onload = () => {
-        console.log("Razorpay script loaded successfully");
         resolve(true);
       };
       script.onerror = () => {
@@ -60,7 +58,6 @@ export const RenderRazorpay:React.FC<RenderRazorpayProps> = ({ orderId,
                 modal: {
                     confirm_close: true,
                     ondismiss: () => {
-                      console.log("payment modal closed by user");
                       setDisplayRazorpay(false);
                     }
                 },
@@ -74,7 +71,6 @@ export const RenderRazorpay:React.FC<RenderRazorpayProps> = ({ orderId,
 
             const displayRazorpay = async (options: RazorpayOptions) => {
                 const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-              console.log("display called")
                 if(!res){
                     console.log('Razorpay SDK failed to load. Are you online?');
       return;
@@ -84,7 +80,6 @@ export const RenderRazorpay:React.FC<RenderRazorpayProps> = ({ orderId,
                     return;
                   }
                   if(res) {
-                    console.log("opend")
                   }
                 const rzpl = new window.Razorpay(options);
                 rzpl.on('payment-submit', (response: any) => {
@@ -97,14 +92,8 @@ export const RenderRazorpay:React.FC<RenderRazorpayProps> = ({ orderId,
                 rzpl.open();
             }
 
-            const handlePayment = async (status: string, orderDetails: OrderInterface) => {
-                await axios.post("http://localhost/3000/payment", {
-                    status, orderDetails
-                });
-            }
 
             useEffect(() => {
-                console.log('in razorpay');
                 displayRazorpay(options);
               }, []);
 

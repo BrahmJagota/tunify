@@ -40,7 +40,7 @@ const [uploadUrl, setUploadUrl] = useState('');
 
   const handleFileUpload = () => {
     axios
-      .post('http://localhost:3000/upload-music', {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/upload-music`, {
         fileInfo, 
       }, {withCredentials: true})
       .then(response => {

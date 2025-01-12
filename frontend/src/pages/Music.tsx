@@ -8,7 +8,7 @@ import { RenderRazorpay } from "../components/DisplayRazorpay";
 import { useRazorpayContext } from "../context/RazorpayContext";
 import Dropdown from "../components/Dropdown";
 import { useAuthContext } from "../context/AuthContext";
-import { handleDownload } from "../components/test/DownloadButton";
+import { handleDownload } from "../components/DownloadButton";
 interface MusicList {
   id: string;
   title: string;
@@ -53,7 +53,7 @@ export function Music() {
     })
 
     const handleCreateOrder =async (amount: number, musicId: string) => {
-      const data: OrderInterface2 = await axios.post("http://localhost:3000/create-order", {
+      const data: OrderInterface2 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/create-order`, {
         amount: amount*100,
         currency: "INR",
         keyId: import.meta.env.VITE_RAZORPAY_ID,
@@ -72,7 +72,7 @@ export function Music() {
 
 
   const handleGetMusic =async (key: string, filename: string, index: number):Promise<void>=> {
-   return axios.post("http://localhost:3000/get-object", {key})
+   return axios.post(`${import.meta.env.VITE_BACKEND_URL}/get-object`, {key})
     .then(response => {
       setCurrentMusic((prev) => ({
         ...prev,
@@ -85,7 +85,7 @@ export function Music() {
   }
 
   const handleDownloadFile = async (key: string, filename: string) => {
-    await axios.post("http://localhost:3000/get-object", {key})
+    await axios.post(`${import.meta.env.VITE_BACKEND_URL}/get-object`, {key})
     .then(response => {
       handleDownload(response.data, filename);
     })
@@ -113,7 +113,7 @@ export function Music() {
 // list all music and purchased music
   useEffect(() => {
     axios
-      .get("http://localhost:3000/list-music")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/list-music`)
       .then((response) => {
 
         const transformedData: MusicList[] = response.data.map((music: any) => ({
@@ -129,7 +129,7 @@ export function Music() {
       
       const getPurchasedMusic = async () => {
         try {
-          const res = await axios.get('http://localhost:3000/get-purchased-music', {withCredentials: true})
+          const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-purchased-music`, {withCredentials: true})
           const result  =  res.data;
           if(result) {
             const transformedData: MusicList[] = result.map((music: any) => ({

@@ -8,7 +8,7 @@ export default function PurchasedMusic () {
       const [musicList, setMusicList] = useState<MusicList[]>([]);
       useEffect(() => {
         axios
-          .post("http://localhost:3000/get-purchased-music",{}, {withCredentials: true})
+          .post(`${import.meta.env.VITE_BACKEND_URL}/get-purchased-music`,{}, {withCredentials: true})
           .then((response) => {
             setMusicList(response.data);
           })
