@@ -1,0 +1,12 @@
+{
+    "scripts": {
+      "install-server": "cd server && npm install",
+      "install-client": "cd client && npm install",
+      "build-client": "cd client && npm run build",
+      "dev:client": "cd client && npm run dev",
+      "dev:server": "cd server && npx tsx --watch server.ts"
+    },
+    "dependencies": {
+      "dotenv": "^16.4.5"
+    }
+  }
