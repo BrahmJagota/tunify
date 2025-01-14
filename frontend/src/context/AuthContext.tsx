@@ -32,7 +32,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({children
     useEffect(()=> {
         const checkAdmin = async () => {
             
-            const adminCheck = await axios.get('http://localhost:3000/me',  {withCredentials: true});
+            const adminCheck = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/me`,  {withCredentials: true});
             const {admin, user} = adminCheck.data;
             setIsAdmin(admin);
             setUser(user);
