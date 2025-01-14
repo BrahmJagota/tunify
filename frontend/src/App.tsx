@@ -10,7 +10,7 @@ import { PrivateRoute } from './routes/ProtectedRoutes'
 import { RazorPayContextProvider } from './context/RazorpayContext'
 import PurchasedMusic from './pages/PurchasedMusic'
 function App() {
-  axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
+  // axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
 
   return (
     

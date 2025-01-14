@@ -40,7 +40,7 @@ authRouter.post('/auth-google',async (req: Request, res:Response)=> {
         user.refreshToken = refreshToken;
         await user.save();
             res.status(200).cookie('accessToken', accessToken, {
-                httpOnly: false,
+                httpOnly: true,
                 secure: true,
                 sameSite: 'none',
                 maxAge: 3600000,
@@ -76,7 +76,7 @@ authRouter.post('/refresh-token', async (req: Request, res: Response) => {
             { expiresIn: '1h' }
           );
          res.status(200).cookie('accessToken', newAccessToken, {
-            httpOnly: false,
+            httpOnly: true,
             secure: true,
             sameSite: 'none',
             maxAge: 3600000,
@@ -94,12 +94,12 @@ authRouter.get("/logout",async (req, res) => {
     if(user) {
         user.deleteOne();
         res.clearCookie("accessToken", {
-            httpOnly: false,
+            httpOnly: true,
             secure: true,
             sameSite: "strict",
         });
         res.clearCookie("refreshToken", {
-            httpOnly: false,
+            httpOnly: true,
             secure: true, 
             sameSite: "strict",
         });

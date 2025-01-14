@@ -5,6 +5,7 @@ const musicRouter = express.Router();
 
 musicRouter.get('/get-purchased-music',async (req, res) => {
     const token = req.cookies.accessToken;
+    console.log(token)
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
     try {
         if(decoded.role === 'ADMIN'){
