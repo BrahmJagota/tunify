@@ -16,6 +16,7 @@ musicRouter.get('/get-purchased-music',async (req, res) => {
         res.status(200).json(result)
         return;
     } catch (err) { 
+        console.log("err getting purchased music", err)
         res.status(400);
         return;
     }

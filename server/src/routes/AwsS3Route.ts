@@ -53,7 +53,8 @@ awsRouter.post('/upload-music', async (req, res)=> {
                 res.status(400).json({error: "error whike uploading"})
             }
     } catch (err){
-        res.status(400).json({error: "error whike uploading"})
+        console.log('err while uploading music', err)
+        res.status(400).json({error: "error while uploading"})
     }
 })
 awsRouter.get("/list-objects", async (req, res)=> {

@@ -49,6 +49,7 @@ authRouter.post('/auth-google',async (req: Request, res:Response)=> {
                 maxAge: 7 * 24 * 60 * 60 * 1000,
             }).json({message: 'Authentication successful', user});
     } catch (err) {
+        console.log(err);
         res.status(400).json({err});
     }
 });
@@ -78,7 +79,7 @@ authRouter.post('/refresh-token', async (req: Request, res: Response) => {
             maxAge: 3600000,
         }).json({message: 'Authentication successful', user});
     } catch(err) {
-        console.error("err");
+        console.error("err",err);
         res.status(403).json({error: "invalid or expired refresh token"});
     }
     
