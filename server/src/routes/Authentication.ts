@@ -42,10 +42,12 @@ authRouter.post('/auth-google',async (req: Request, res:Response)=> {
             res.status(200).cookie('accessToken', accessToken, {
                 httpOnly: false,
                 secure: true,
+                sameSite: 'none',
                 maxAge: 3600000,
             }).cookie('refreshToken', refreshToken, {
                 httpOnly: false,
                 secure: true,
+                sameSite: 'none',
                 maxAge: 7 * 24 * 60 * 60 * 1000,
             }).json({message: 'Authentication successful', user});
     } catch (err) {
@@ -76,6 +78,7 @@ authRouter.post('/refresh-token', async (req: Request, res: Response) => {
          res.status(200).cookie('accessToken', newAccessToken, {
             httpOnly: false,
             secure: true,
+            sameSite: 'none',
             maxAge: 3600000,
         }).json({message: 'Authentication successful', user});
     } catch(err) {
